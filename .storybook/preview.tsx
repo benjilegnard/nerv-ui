@@ -23,7 +23,9 @@ function applyFonts(source: FontSource = "embedded") {
 
 const channel = addons.getChannel();
 for (const event of [SET_GLOBALS, GLOBALS_UPDATED]) {
-  channel.on(event, ({ globals }: { globals: { fonts?: FontSource } }) => applyFonts(globals.fonts));
+  channel.on(event, ({ globals }: { globals: { fonts?: FontSource } }) =>
+    applyFonts(globals.fonts),
+  );
 }
 applyFonts();
 

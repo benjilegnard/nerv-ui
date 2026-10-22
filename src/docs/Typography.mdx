@@ -13,15 +13,62 @@ picked by comparing them with the reference frames.
 
 <table>
   <thead>
-    <tr><th>Role</th><th>Token</th><th>Font</th><th>Fallback chain</th></tr>
+    <tr>
+      <th>Role</th>
+      <th>Token</th>
+      <th>Font</th>
+      <th>Fallback chain</th>
+    </tr>
   </thead>
   <tbody>
-    <tr><td>Huge alert words</td><td><code>--nerv-font-display</code></td><td>Barlow Condensed 800/900</td><td>Oswald, Arial Narrow, Impact</td></tr>
-    <tr><td>Titles, boxed labels</td><td><code>--nerv-font-compressed</code></td><td>Antonio 700</td><td>Oswald, Arial Narrow, Impact</td></tr>
-    <tr><td>Small data text</td><td><code>--nerv-font-ui</code></td><td>Archivo Narrow 400/700</td><td>Arial Narrow, Helvetica Neue</td></tr>
-    <tr><td>Japanese headings</td><td><code>--nerv-font-mincho</code></td><td>Shippori Mincho B1 800</td><td>Noto Serif JP 900, Hiragino/Yu Mincho</td></tr>
-    <tr><td>Timers, clocks</td><td><code>--nerv-font-segment</code></td><td>DSEG7 Classic</td><td>VT323, monospace</td></tr>
-    <tr><td>Terminal dumps</td><td><code>--nerv-font-terminal</code></td><td>VT323</td><td>monospace</td></tr>
+    <tr>
+      <td>Huge alert words</td>
+      <td>
+        <code>--nerv-font-display</code>
+      </td>
+      <td>Barlow Condensed 800/900</td>
+      <td>Oswald, Arial Narrow, Impact</td>
+    </tr>
+    <tr>
+      <td>Titles, boxed labels</td>
+      <td>
+        <code>--nerv-font-compressed</code>
+      </td>
+      <td>Antonio 700</td>
+      <td>Oswald, Arial Narrow, Impact</td>
+    </tr>
+    <tr>
+      <td>Small data text</td>
+      <td>
+        <code>--nerv-font-ui</code>
+      </td>
+      <td>Archivo Narrow 400/700</td>
+      <td>Arial Narrow, Helvetica Neue</td>
+    </tr>
+    <tr>
+      <td>Japanese headings</td>
+      <td>
+        <code>--nerv-font-mincho</code>
+      </td>
+      <td>Shippori Mincho B1 800</td>
+      <td>Noto Serif JP 900, Hiragino/Yu Mincho</td>
+    </tr>
+    <tr>
+      <td>Timers, clocks</td>
+      <td>
+        <code>--nerv-font-segment</code>
+      </td>
+      <td>DSEG7 Classic</td>
+      <td>VT323, monospace</td>
+    </tr>
+    <tr>
+      <td>Terminal dumps</td>
+      <td>
+        <code>--nerv-font-terminal</code>
+      </td>
+      <td>VT323</td>
+      <td>monospace</td>
+    </tr>
   </tbody>
 </table>
 
@@ -84,7 +131,14 @@ DSEG7 is not on Google Fonts. `fonts.google.css` loads it from jsDelivr
 />
 
 <Panel style={{ background: "var(--nerv-red-600)", padding: 0 }}>
-  <div style={{ height: "1.5rem", background: "var(--nerv-pattern-hazard)", "--nerv-hazard-a": "var(--nerv-black)", "--nerv-hazard-b": "var(--nerv-red-600)" }} />
+  <div
+    style={{
+      height: "1.5rem",
+      background: "var(--nerv-pattern-hazard)",
+      "--nerv-hazard-a": "var(--nerv-black)",
+      "--nerv-hazard-b": "var(--nerv-red-600)",
+    }}
+  />
   <div
     style={{
       fontFamily: "var(--nerv-font-display)",
@@ -98,7 +152,14 @@ DSEG7 is not on Google Fonts. `fonts.google.css` loads it from jsDelivr
   >
     ALERT
   </div>
-  <div style={{ height: "1.5rem", background: "var(--nerv-pattern-hazard)", "--nerv-hazard-a": "var(--nerv-black)", "--nerv-hazard-b": "var(--nerv-red-600)" }} />
+  <div
+    style={{
+      height: "1.5rem",
+      background: "var(--nerv-pattern-hazard)",
+      "--nerv-hazard-a": "var(--nerv-black)",
+      "--nerv-hazard-b": "var(--nerv-red-600)",
+    }}
+  />
 </Panel>
 
 ## Compressed: Antonio
@@ -112,14 +173,44 @@ DSEG7 is not on Google Fonts. `fonts.google.css` loads it from jsDelivr
 />
 
 <Panel>
-  <div style={{ transform: "rotate(-12deg) skewX(-6deg)", padding: "3rem 1rem", color: "var(--nerv-amber)" }}>
-    <div style={{ fontFamily: "var(--nerv-font-compressed)", fontWeight: 700, fontSize: "var(--nerv-text-xl)", borderBottom: "3px solid", lineHeight: 1 }}>
+  <div
+    style={{
+      transform: "rotate(-12deg) skewX(-6deg)",
+      padding: "3rem 1rem",
+      color: "var(--nerv-amber)",
+    }}
+  >
+    <div
+      style={{
+        fontFamily: "var(--nerv-font-compressed)",
+        fontWeight: 700,
+        fontSize: "var(--nerv-text-xl)",
+        borderBottom: "3px solid",
+        lineHeight: 1,
+      }}
+    >
       TERMINAL DOGMA
     </div>
-    <div style={{ fontFamily: "var(--nerv-font-compressed)", fontWeight: 700, fontSize: "var(--nerv-text-display)", lineHeight: "var(--nerv-leading-none)", letterSpacing: "var(--nerv-tracking-tight)" }}>
+    <div
+      style={{
+        fontFamily: "var(--nerv-font-compressed)",
+        fontWeight: 700,
+        fontSize: "var(--nerv-text-display)",
+        lineHeight: "var(--nerv-leading-none)",
+        letterSpacing: "var(--nerv-tracking-tight)",
+      }}
+    >
       A.T.FIELD
     </div>
-    <div style={{ fontFamily: "var(--nerv-font-compressed)", fontWeight: 700, fontSize: "var(--nerv-text-xl)", borderTop: "3px solid", lineHeight: 1.1 }}>
+    <div
+      style={{
+        fontFamily: "var(--nerv-font-compressed)",
+        fontWeight: 700,
+        fontSize: "var(--nerv-text-xl)",
+        borderTop: "3px solid",
+        lineHeight: 1.1,
+      }}
+    >
       GENERATION
     </div>
   </div>
@@ -161,13 +252,34 @@ DSEG7 is not on Google Fonts. `fonts.google.css` loads it from jsDelivr
 
 <Panel>
   <div style={{ textAlign: "center", color: "var(--nerv-vermilion)", padding: "1rem 0" }}>
-    <div style={{ fontFamily: "var(--nerv-font-mincho)", fontWeight: 800, fontSize: "var(--nerv-text-2xl)", letterSpacing: "var(--nerv-tracking-mincho)" }}>
+    <div
+      style={{
+        fontFamily: "var(--nerv-font-mincho)",
+        fontWeight: 800,
+        fontSize: "var(--nerv-text-2xl)",
+        letterSpacing: "var(--nerv-tracking-mincho)",
+      }}
+    >
       非常事態
     </div>
-    <div style={{ fontFamily: "var(--nerv-font-display)", fontWeight: 800, fontSize: "var(--nerv-text-3xl)", lineHeight: 1 }}>
+    <div
+      style={{
+        fontFamily: "var(--nerv-font-display)",
+        fontWeight: 800,
+        fontSize: "var(--nerv-text-3xl)",
+        lineHeight: 1,
+      }}
+    >
       EMERGENCY
     </div>
-    <div style={{ fontFamily: "var(--nerv-font-mincho)", fontWeight: 800, fontSize: "var(--nerv-text-2xl)", letterSpacing: "var(--nerv-tracking-mincho)" }}>
+    <div
+      style={{
+        fontFamily: "var(--nerv-font-mincho)",
+        fontWeight: 800,
+        fontSize: "var(--nerv-text-2xl)",
+        letterSpacing: "var(--nerv-tracking-mincho)",
+      }}
+    >
       非常事態
     </div>
   </div>
@@ -184,7 +296,14 @@ DSEG7 is not on Google Fonts. `fonts.google.css` loads it from jsDelivr
   notes="Seven-segment digits for the battery timer and clocks (frames 003, 044, 050). DSEG's glyphs line up with an '8' drawn underneath, which you can use to render the unlit segments."
 />
 
-<Specimen family="DSEG7 Classic" weights={[700]} italic sample="1:00:87" size="var(--nerv-text-3xl)" notes="The italic matches the slanted internal-battery counter." />
+<Specimen
+  family="DSEG7 Classic"
+  weights={[700]}
+  italic
+  sample="1:00:87"
+  size="var(--nerv-text-3xl)"
+  notes="The italic matches the slanted internal-battery counter."
+/>
 
 <Panel>
   <SegmentDemo value="4:59:10" ghost="8:88:88" />
@@ -220,10 +339,11 @@ CONSOLE DRIVERS     Check                   OK
 STATUS ANALYZER     Check        SLAVE      OK
 VIRUS PROTECTION    Chech        GREEN      OK
 
-addr PSP  blks    size  owner/parameters
-D0E0 sys     1    5296  kozaic
-D22C sys     1    2416  ersdry
----- UMB total:  53 TB ----`}
+addr PSP blks size owner/parameters
+D0E0 sys 1 5296 kozaic
+D22C sys 1 2416 ersdry
+---- UMB total: 53 TB ----`}
+
   </pre>
 </Panel>
 
@@ -232,9 +352,17 @@ D22C sys     1    2416  ersdry
 The four condensed candidates from the first analysis, side by side. Change
 the tokens in `tokens.css` to swap them.
 
-<Compare families={["Antonio", "Barlow Condensed", "Oswald", "Archivo Narrow"]} sample="A.T.FIELD DETECTED" />
+<Compare
+  families={["Antonio", "Barlow Condensed", "Oswald", "Archivo Narrow"]}
+  sample="A.T.FIELD DETECTED"
+/>
 
-<Compare families={["Antonio", "Barlow Condensed", "Oswald", "Archivo Narrow"]} sample="EMERGENCY" weight={700} size="var(--nerv-text-3xl)" />
+<Compare
+  families={["Antonio", "Barlow Condensed", "Oswald", "Archivo Narrow"]}
+  sample="EMERGENCY"
+  weight={700}
+  size="var(--nerv-text-3xl)"
+/>
 
 ## Font tokens
 
@@ -247,12 +375,32 @@ the tokens in `tokens.css` to swap them.
     "--nerv-font-segment",
     "--nerv-font-terminal",
   ]}
-  preview={(t) => <span style={{ fontFamily: `var(${t})`, fontWeight: 700, fontSize: "var(--nerv-text-lg)" }}>NERV 非常 4:59</span>}
+  preview={(t) => (
+    <span style={{ fontFamily: `var(${t})`, fontWeight: 700, fontSize: "var(--nerv-text-lg)" }}>
+      NERV 非常 4:59
+    </span>
+  )}
 />
 
 <TokenTable
-  tokens={["--nerv-weight-regular", "--nerv-weight-medium", "--nerv-weight-bold", "--nerv-weight-heavy", "--nerv-weight-black"]}
-  preview={(t) => <span style={{ fontFamily: "var(--nerv-font-display)", fontWeight: `var(${t})`, fontSize: "var(--nerv-text-lg)" }}>EMERGENCY</span>}
+  tokens={[
+    "--nerv-weight-regular",
+    "--nerv-weight-medium",
+    "--nerv-weight-bold",
+    "--nerv-weight-heavy",
+    "--nerv-weight-black",
+  ]}
+  preview={(t) => (
+    <span
+      style={{
+        fontFamily: "var(--nerv-font-display)",
+        fontWeight: `var(${t})`,
+        fontSize: "var(--nerv-text-lg)",
+      }}
+    >
+      EMERGENCY
+    </span>
+  )}
 />
 
 ## Licenses

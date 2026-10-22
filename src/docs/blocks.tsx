@@ -200,7 +200,12 @@ export function Compare({
           </span>
           <span
             className="nerv-doc-specimen__sample"
-            style={{ fontFamily: `"${family}"`, fontWeight: weight, fontSize: size, color: "var(--nerv-amber)" }}
+            style={{
+              fontFamily: `"${family}"`,
+              fontWeight: weight,
+              fontSize: size,
+              color: "var(--nerv-amber)",
+            }}
           >
             {sample}
           </span>

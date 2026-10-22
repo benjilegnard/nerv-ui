@@ -79,7 +79,8 @@
   /* small data text, lists, axis labels */
   --nerv-font-ui: "Archivo Narrow", "Arial Narrow", "Helvetica Neue", sans-serif;
   /* 非常事態, 極秘, 危険: heavy Mincho */
-  --nerv-font-mincho: "Shippori Mincho B1", "Noto Serif JP", "Hiragino Mincho ProN", "Yu Mincho", serif;
+  --nerv-font-mincho:
+    "Shippori Mincho B1", "Noto Serif JP", "Hiragino Mincho ProN", "Yu Mincho", serif;
   /* 4:59:10 battery timer, clocks */
   --nerv-font-segment: "DSEG7 Classic", "VT323", ui-monospace, monospace;
   /* boot logs, MAGI system dumps */
@@ -155,7 +156,8 @@
   /* ── Glow (CRT bloom) ──────────────────────────────────────────── */
 
   --nerv-glow-sm: 0 0 2px var(--nerv-glow-color), 0 0 6px var(--nerv-glow-color);
-  --nerv-glow-md: 0 0 2px var(--nerv-glow-color), 0 0 8px var(--nerv-glow-color), 0 0 18px var(--nerv-glow-color);
+  --nerv-glow-md:
+    0 0 2px var(--nerv-glow-color), 0 0 8px var(--nerv-glow-color), 0 0 18px var(--nerv-glow-color);
   --nerv-glow-lg:
     0 0 3px var(--nerv-glow-color), 0 0 12px var(--nerv-glow-color), 0 0 32px var(--nerv-glow-color);
 

@@ -1,6 +1,8 @@
 function App() {
   return (
-    <main style={{ display: "grid", placeItems: "center", minHeight: "100svh", textAlign: "center" }}>
+    <main
+      style={{ display: "grid", placeItems: "center", minHeight: "100svh", textAlign: "center" }}
+    >
       <div>
         <div
           style={{
@@ -25,7 +27,9 @@ function App() {
         >
           NERV UI
         </h1>
-        <p style={{ fontFamily: "var(--nerv-font-ui)" }}>Run `pnpm storybook` for the component docs.</p>
+        <p style={{ fontFamily: "var(--nerv-font-ui)" }}>
+          Run `pnpm storybook` for the component docs.
+        </p>
       </div>
     </main>
   );
