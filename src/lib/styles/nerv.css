@@ -1,0 +1,3 @@
+/* Default entry point: tokens + self-hosted fonts. */
+@import "./fonts.embedded.css";
+@import "./tokens.css";

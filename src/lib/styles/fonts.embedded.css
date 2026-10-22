@@ -1,0 +1,64 @@
+/*
+ * Self-hosted fonts, bundled with the library (no network request to a
+ * third party). Google Fonts files come from the @fontsource packages, which
+ * repackage the exact Google Fonts woff2 with unicode-range subsets, so the
+ * Japanese fonts only download the slices a page actually uses.
+ *
+ * Use fonts.google.css instead to load the same families from the CDN.
+ */
+
+/* --nerv-font-display */
+@import "@fontsource/barlow-condensed/500.css";
+@import "@fontsource/barlow-condensed/700.css";
+@import "@fontsource/barlow-condensed/800.css";
+@import "@fontsource/barlow-condensed/900.css";
+
+/* --nerv-font-compressed */
+@import "@fontsource/antonio/400.css";
+@import "@fontsource/antonio/700.css";
+@import "@fontsource/oswald/500.css";
+@import "@fontsource/oswald/700.css";
+
+/* --nerv-font-ui */
+@import "@fontsource/archivo-narrow/400.css";
+@import "@fontsource/archivo-narrow/700.css";
+
+/* --nerv-font-mincho */
+@import "@fontsource/shippori-mincho-b1/800.css";
+@import "@fontsource/noto-serif-jp/900.css";
+
+/* --nerv-font-terminal */
+@import "@fontsource/vt323/400.css";
+
+/* --nerv-font-segment: DSEG is not on Google Fonts, vendored in ../fonts (OFL, keshikan/DSEG) */
+@font-face {
+  font-family: "DSEG7 Classic";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("../fonts/dseg7-classic/DSEG7Classic-Regular.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "DSEG7 Classic";
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("../fonts/dseg7-classic/DSEG7Classic-Bold.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "DSEG7 Classic";
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: url("../fonts/dseg7-classic/DSEG7Classic-Italic.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "DSEG7 Classic";
+  font-style: italic;
+  font-weight: 700;
+  font-display: swap;
+  src: url("../fonts/dseg7-classic/DSEG7Classic-BoldItalic.woff2") format("woff2");
+}

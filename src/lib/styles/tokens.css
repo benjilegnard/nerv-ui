@@ -1,0 +1,174 @@
+/*
+ * NERV UI design tokens.
+ *
+ * Primitive colours were sampled from the reference frames in docs/reference
+ * (frame numbers in comments, see docs/REFERENCE.md). Everything else derives
+ * from them with color-mix() so a single primitive change propagates.
+ *
+ * Fonts are only *named* here: load them with either
+ *   - fonts.embedded.css  (self-hosted woff2, works offline)
+ *   - fonts.google.css    (Google Fonts CDN + jsDelivr for DSEG)
+ * Both files register the same family names, so tokens work with either.
+ */
+
+:root {
+  /* ── Primitive colours ─────────────────────────────────────────── */
+
+  /* Blacks */
+  --nerv-black: #000000;
+  --nerv-black-warm: #0f0101; /* 001, 021: CRT black with red bleed */
+  --nerv-navy: #181830; /* hex mesh backgrounds, 072 */
+
+  /* Reds */
+  --nerv-red-900: #5a0006; /* darkest red fills, 062 */
+  --nerv-red-700: #a3010c; /* dominant red hue across all frames */
+  --nerv-red-600: #c50e08; /* ALERT background, 002 */
+  --nerv-red-500: #fd332d; /* glowing red text and lamps, 052 */
+  --nerv-crimson: #e30048; /* DETECTED stamp, toxicity bars, 022 / 080 */
+
+  /* Oranges */
+  --nerv-rust: #be5303; /* flat orange backgrounds, 007 */
+  --nerv-vermilion: #ea5213; /* EMERGENCY title, 006 */
+  --nerv-orange: #e9771d; /* outlined label boxes */
+  --nerv-amber: #f9a11b; /* A.T.FIELD, timers, most UI text, 021 / 003 */
+  --nerv-yellow: #feb91d; /* highlights, ANALYZING, 023 */
+
+  /* Greens */
+  --nerv-green-700: #2f923b; /* dim grid / contour lines */
+  --nerv-green: #59f486; /* bright vector green, 063 */
+  --nerv-phosphor: #61b981; /* terminal text, 012 */
+  --nerv-mint: #6dffb2; /* MAGI cards, phase bars, 058 / 061 */
+  --nerv-aqua: #7effd8; /* toxicity bars, 080 */
+  --nerv-teal: #45f3b7; /* line-art maps, 070 */
+  --nerv-lime: #86be3a; /* bezel gradient end, 003 */
+
+  /* Blues & violets */
+  --nerv-blue-700: #2e4fae; /* gradient fills, 069 / 083 */
+  --nerv-blue: #6c93e3; /* medical monitor traces, 092 */
+  --nerv-steel: #4c5c94; /* hex mesh strokes, 072 */
+  --nerv-violet: #803bbc; /* contour waveforms, 008 */
+  --nerv-magenta: #bc52bd; /* sine bundles, 030 */
+
+  /* Neutrals */
+  --nerv-grey-light: #d1d1d1; /* light clock panel, 050 */
+  --nerv-white: #f2f2f2; /* white HUD labels, 043 / 086 */
+
+  /* ── Semantic colours ──────────────────────────────────────────── */
+
+  --nerv-color-bg: var(--nerv-black);
+  --nerv-color-surface: var(--nerv-black-warm);
+  --nerv-color-text: var(--nerv-amber);
+  --nerv-color-text-muted: color-mix(in oklab, var(--nerv-amber) 55%, var(--nerv-black));
+  --nerv-color-frame: var(--nerv-orange);
+  --nerv-color-grid: color-mix(in oklab, var(--nerv-green) 45%, var(--nerv-black));
+
+  --nerv-color-alert: var(--nerv-red-600);
+  --nerv-color-alert-text: var(--nerv-red-500);
+  --nerv-color-warning: var(--nerv-vermilion);
+  --nerv-color-ok: var(--nerv-mint);
+  --nerv-color-info: var(--nerv-teal);
+  --nerv-color-data: var(--nerv-green);
+  --nerv-color-terminal: var(--nerv-phosphor);
+
+  /* ── Font families ─────────────────────────────────────────────── */
+
+  /* ALERT, DANGER, EMERGENCY, REFUSED: heavy condensed grotesk */
+  --nerv-font-display: "Barlow Condensed", "Oswald", "Arial Narrow", Impact, sans-serif;
+  /* A.T.FIELD, LOST, boxed labels: tall compressed grotesk */
+  --nerv-font-compressed: "Antonio", "Oswald", "Arial Narrow", Impact, sans-serif;
+  /* small data text, lists, axis labels */
+  --nerv-font-ui: "Archivo Narrow", "Arial Narrow", "Helvetica Neue", sans-serif;
+  /* 非常事態, 極秘, 危険: heavy Mincho */
+  --nerv-font-mincho: "Shippori Mincho B1", "Noto Serif JP", "Hiragino Mincho ProN", "Yu Mincho", serif;
+  /* 4:59:10 battery timer, clocks */
+  --nerv-font-segment: "DSEG7 Classic", "VT323", ui-monospace, monospace;
+  /* boot logs, MAGI system dumps */
+  --nerv-font-terminal: "VT323", ui-monospace, "Courier New", monospace;
+
+  /* ── Font weights ──────────────────────────────────────────────── */
+
+  --nerv-weight-regular: 400;
+  --nerv-weight-medium: 500;
+  --nerv-weight-bold: 700;
+  --nerv-weight-heavy: 800;
+  --nerv-weight-black: 900;
+
+  /* ── Type scale ────────────────────────────────────────────────── */
+
+  --nerv-text-2xs: 0.625rem;
+  --nerv-text-xs: 0.75rem;
+  --nerv-text-sm: 0.875rem;
+  --nerv-text-md: 1rem;
+  --nerv-text-lg: 1.375rem;
+  --nerv-text-xl: 2rem;
+  --nerv-text-2xl: 3rem;
+  --nerv-text-3xl: clamp(3rem, 8vw, 6rem);
+  --nerv-text-display: clamp(4rem, 14vw, 12rem);
+
+  --nerv-leading-none: 0.85;
+  --nerv-leading-tight: 1;
+  --nerv-leading-normal: 1.2;
+
+  --nerv-tracking-tight: -0.02em;
+  --nerv-tracking-normal: 0;
+  --nerv-tracking-wide: 0.06em;
+  --nerv-tracking-mincho: 0.3em; /* 非 常 事 態 is set very loose */
+
+  /* ── Spacing ───────────────────────────────────────────────────── */
+
+  --nerv-space-1: 0.125rem;
+  --nerv-space-2: 0.25rem;
+  --nerv-space-3: 0.5rem;
+  --nerv-space-4: 0.75rem;
+  --nerv-space-5: 1rem;
+  --nerv-space-6: 1.5rem;
+  --nerv-space-7: 2rem;
+  --nerv-space-8: 3rem;
+
+  /* ── Strokes ───────────────────────────────────────────────────── */
+
+  --nerv-stroke-hairline: 1px;
+  --nerv-stroke-thin: 2px;
+  --nerv-stroke-thick: 4px;
+  /* boxed labels have a gap between two strokes (TOP SECRET, 005) */
+  --nerv-stroke-double: 4px double;
+  --nerv-radius-none: 0;
+  --nerv-radius-label: 0.2em; /* PILOT VANISHED, ANALYZING boxes */
+  --nerv-radius-pill: 999px; /* toxicity bars, 080 */
+
+  /* ── Pattern / glow parameters (override these locally) ────────── */
+
+  --nerv-glow-color: currentColor;
+  --nerv-hazard-a: var(--nerv-red-600);
+  --nerv-hazard-b: var(--nerv-black);
+  --nerv-hazard-size: 1.5rem;
+}
+
+/*
+ * Tokens built from other variables are declared on every element instead of
+ * :root: a custom property is resolved where it is declared, so declaring them
+ * on :root would ignore a local `--nerv-hazard-a` or `--nerv-glow-color`.
+ */
+*,
+::before,
+::after {
+  /* ── Glow (CRT bloom) ──────────────────────────────────────────── */
+
+  --nerv-glow-sm: 0 0 2px var(--nerv-glow-color), 0 0 6px var(--nerv-glow-color);
+  --nerv-glow-md: 0 0 2px var(--nerv-glow-color), 0 0 8px var(--nerv-glow-color), 0 0 18px var(--nerv-glow-color);
+  --nerv-glow-lg:
+    0 0 3px var(--nerv-glow-color), 0 0 12px var(--nerv-glow-color), 0 0 32px var(--nerv-glow-color);
+
+  /* ── Patterns ──────────────────────────────────────────────────── */
+
+  --nerv-pattern-hazard: repeating-linear-gradient(
+    -45deg,
+    var(--nerv-hazard-a) 0 var(--nerv-hazard-size),
+    var(--nerv-hazard-b) var(--nerv-hazard-size) calc(var(--nerv-hazard-size) * 2)
+  );
+  --nerv-pattern-scanlines: repeating-linear-gradient(
+    to bottom,
+    transparent 0 2px,
+    color-mix(in srgb, var(--nerv-black) 35%, transparent) 2px 3px
+  );
+}
