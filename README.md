@@ -1,4 +1,4 @@
-# nerv-ui
+# NervUI
 
 An attempt to recreate evangelion's famous ui screen.
 
