@@ -1,10 +1,42 @@
 {
   "name": "nervui",
   "version": "0.0.0",
+  "description": "React UI kit inspired by the NERV interfaces of Neon Genesis Evangelion",
+  "keywords": [
+    "css",
+    "design-tokens",
+    "evangelion",
+    "nerv",
+    "react",
+    "ui"
+  ],
+  "homepage": "https://benjilegnard.github.io/nerv-ui/",
+  "bugs": {
+    "url": "https://github.com/benjilegnard/nerv-ui/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/benjilegnard/nerv-ui.git"
+  },
+  "files": [
+    "dist"
+  ],
   "type": "module",
+  "sideEffects": [
+    "**/*.css"
+  ],
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    },
+    "./styles/*": "./dist/styles/*",
+    "./package.json": "./package.json"
+  },
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
+    "build-lib": "tsdown",
     "lint": "oxlint",
     "format": "oxfmt",
     "format:check": "oxfmt --check",
@@ -19,9 +51,7 @@
     "@fontsource/noto-serif-jp": "^5.3.1",
     "@fontsource/oswald": "^5.3.0",
     "@fontsource/shippori-mincho-b1": "^5.3.0",
-    "@fontsource/vt323": "^5.3.0",
-    "react": "^19.3.1",
-    "react-dom": "^19.3.1"
+    "@fontsource/vt323": "^5.3.0"
   },
   "devDependencies": {
     "@storybook/addon-docs": "^10.6.3",
@@ -34,9 +64,16 @@
     "oxfmt": "^0.74.0",
     "oxlint": "^1.88.0",
     "oxlint-tsgolint": "^7.0.2004",
+    "react": "^19.3.1",
+    "react-dom": "^19.3.1",
     "storybook": "^10.6.3",
+    "tsdown": "^0.23.1",
     "typescript": "~6.0.3",
     "vite": "^8.3.4"
+  },
+  "peerDependencies": {
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
   },
   "packageManager": "pnpm@12.14.0"
 }

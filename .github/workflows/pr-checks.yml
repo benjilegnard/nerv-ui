@@ -111,6 +111,24 @@ jobs:
       - name: Build app
         run: pnpm run build
 
+  build-lib:
+    needs: install
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+      - name: Setup pnpm and Node.js
+        uses: pnpm/setup@v3
+        with:
+          runtime: node@26
+          cache: true
+          save-cache: false
+          require-lockfile: true
+      - name: Build library
+        run: pnpm run build-lib
+      - name: Check package contents
+        run: npm pack --dry-run
+
   build-storybook:
     needs: install
     runs-on: ubuntu-latest
@@ -128,7 +146,7 @@ jobs:
         run: pnpm run build-storybook
 
   report:
-    needs: [install, lint, format, test, build-app, build-storybook]
+    needs: [install, lint, format, test, build-app, build-lib, build-storybook]
     if: always() && needs.install.result == 'success'
     runs-on: ubuntu-latest
     permissions:
@@ -144,6 +162,7 @@ jobs:
           FORMAT_RESULT: ${{ needs.format.result }}
           TEST_RESULT: ${{ needs.test.result }}
           BUILD_APP_RESULT: ${{ needs.build-app.result }}
+          BUILD_LIB_RESULT: ${{ needs.build-lib.result }}
           BUILD_STORYBOOK_RESULT: ${{ needs.build-storybook.result }}
         run: |
           icon() { [ "$1" = "success" ] && echo "✅" || echo "❌"; }
@@ -156,6 +175,7 @@ jobs:
             echo "| Format | $(icon "$FORMAT_RESULT") $FORMAT_RESULT |"
             echo "| Tests | $(icon "$TEST_RESULT") $TEST_RESULT |"
             echo "| Build app | $(icon "$BUILD_APP_RESULT") $BUILD_APP_RESULT |"
+            echo "| Build lib | $(icon "$BUILD_LIB_RESULT") $BUILD_LIB_RESULT |"
             echo "| Build storybook | $(icon "$BUILD_STORYBOOK_RESULT") $BUILD_STORYBOOK_RESULT |"
             echo
             echo "### Coverage"
