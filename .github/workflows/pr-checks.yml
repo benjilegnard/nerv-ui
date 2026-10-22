@@ -1,0 +1,190 @@
+name: Pull request checks
+on:
+  pull_request:
+    branches:
+      - main
+
+permissions:
+  contents: read
+
+concurrency:
+  group: pr-checks-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+jobs:
+  # Installs once and saves the pnpm store, the parallel jobs below only restore it.
+  install:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+      - name: Setup pnpm and Node.js
+        uses: pnpm/setup@v3
+        with:
+          runtime: node@26
+          cache: true
+          require-lockfile: true
+
+  lint:
+    needs: install
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+      - name: Setup pnpm and Node.js
+        uses: pnpm/setup@v3
+        with:
+          runtime: node@26
+          cache: true
+          save-cache: false
+          require-lockfile: true
+      - name: Lint
+        id: lint
+        run: |
+          set +e
+          pnpm exec oxlint --format=stylish > lint.txt 2>&1
+          code=$?
+          cat lint.txt
+          echo "exit-code=$code" >> "$GITHUB_OUTPUT"
+          exit $code
+      - name: Upload lint report
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: lint-report
+          path: lint.txt
+          if-no-files-found: ignore
+
+  format:
+    needs: install
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+      - name: Setup pnpm and Node.js
+        uses: pnpm/setup@v3
+        with:
+          runtime: node@26
+          cache: true
+          save-cache: false
+          require-lockfile: true
+      - name: Check formatting
+        run: pnpm run format:check
+
+  test:
+    needs: install
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+      - name: Setup pnpm and Node.js
+        uses: pnpm/setup@v3
+        with:
+          runtime: node@26
+          cache: true
+          save-cache: false
+          require-lockfile: true
+      # Expects vitest with the `json-summary` coverage reporter (coverage/coverage-summary.json).
+      - name: Test with coverage
+        run: pnpm run --if-present test:coverage
+      - name: Upload coverage report
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: coverage-report
+          path: coverage/coverage-summary.json
+          if-no-files-found: ignore
+
+  build-app:
+    needs: install
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+      - name: Setup pnpm and Node.js
+        uses: pnpm/setup@v3
+        with:
+          runtime: node@26
+          cache: true
+          save-cache: false
+          require-lockfile: true
+      - name: Build app
+        run: pnpm run build
+
+  build-storybook:
+    needs: install
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+      - name: Setup pnpm and Node.js
+        uses: pnpm/setup@v3
+        with:
+          runtime: node@26
+          cache: true
+          save-cache: false
+          require-lockfile: true
+      - name: Build storybook
+        run: pnpm run build-storybook
+
+  report:
+    needs: [install, lint, format, test, build-app, build-storybook]
+    if: always() && needs.install.result == 'success'
+    runs-on: ubuntu-latest
+    permissions:
+      pull-requests: write
+    steps:
+      - name: Download reports
+        uses: actions/download-artifact@v8
+        with:
+          path: reports
+      - name: Build comment
+        env:
+          LINT_RESULT: ${{ needs.lint.result }}
+          FORMAT_RESULT: ${{ needs.format.result }}
+          TEST_RESULT: ${{ needs.test.result }}
+          BUILD_APP_RESULT: ${{ needs.build-app.result }}
+          BUILD_STORYBOOK_RESULT: ${{ needs.build-storybook.result }}
+        run: |
+          icon() { [ "$1" = "success" ] && echo "✅" || echo "❌"; }
+          {
+            echo "## Pull request checks"
+            echo
+            echo "| Check | Result |"
+            echo "| --- | --- |"
+            echo "| Lint | $(icon "$LINT_RESULT") $LINT_RESULT |"
+            echo "| Format | $(icon "$FORMAT_RESULT") $FORMAT_RESULT |"
+            echo "| Tests | $(icon "$TEST_RESULT") $TEST_RESULT |"
+            echo "| Build app | $(icon "$BUILD_APP_RESULT") $BUILD_APP_RESULT |"
+            echo "| Build storybook | $(icon "$BUILD_STORYBOOK_RESULT") $BUILD_STORYBOOK_RESULT |"
+            echo
+            echo "### Coverage"
+            echo
+            summary=reports/coverage-report/coverage-summary.json
+            if [ -f "$summary" ]; then
+              echo "| Metric | Covered | Total | % |"
+              echo "| --- | --- | --- | --- |"
+              jq -r '.total | to_entries[] | "| \(.key) | \(.value.covered) | \(.value.total) | \(.value.pct)% |"' "$summary"
+            else
+              echo "_No coverage report found._"
+            fi
+            echo
+            echo "### Lint"
+            echo
+            if [ -s reports/lint-report/lint.txt ]; then
+              echo "<details><summary>oxlint output</summary>"
+              echo
+              echo '```'
+              head -c 60000 reports/lint-report/lint.txt
+              echo '```'
+              echo "</details>"
+            else
+              echo "_No lint output._"
+            fi
+          } > comment.md
+          cat comment.md >> "$GITHUB_STEP_SUMMARY"
+      - name: Post comment
+        uses: marocchino/sticky-pull-request-comment@v3
+        with:
+          header: pr-checks
+          path: comment.md

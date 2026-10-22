@@ -5,7 +5,7 @@ addons.setConfig({
   theme: create({
     base: "dark",
     brandTitle: "NERV-UI",
-    brandImage: "/nerv-ui-logo-full.png",
+    brandImage: "./nerv-ui-logo-full.png",
     brandTarget: "_self",
   }),
 });
