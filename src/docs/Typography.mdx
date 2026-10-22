@@ -1,0 +1,263 @@
+import { Meta } from "@storybook/addon-docs/blocks";
+import { Specimen, Compare, Panel, TokenTable, SegmentDemo } from "./blocks";
+
+<Meta title="Foundations/Typography" />
+
+# Typography
+
+Evangelion's UI was set in commercial typefaces: an ultra-condensed heavy
+grotesk close to _Helvetica Condensed / Compressed_ for Latin text, and
+_Matisse EB_ (Fontworks) for the Japanese headings. The original fonts were not
+identified with certainty; these choices are free, OFL-licensed look-alikes
+picked by comparing them with the reference frames.
+
+<table>
+  <thead>
+    <tr><th>Role</th><th>Token</th><th>Font</th><th>Fallback chain</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Huge alert words</td><td><code>--nerv-font-display</code></td><td>Barlow Condensed 800/900</td><td>Oswald, Arial Narrow, Impact</td></tr>
+    <tr><td>Titles, boxed labels</td><td><code>--nerv-font-compressed</code></td><td>Antonio 700</td><td>Oswald, Arial Narrow, Impact</td></tr>
+    <tr><td>Small data text</td><td><code>--nerv-font-ui</code></td><td>Archivo Narrow 400/700</td><td>Arial Narrow, Helvetica Neue</td></tr>
+    <tr><td>Japanese headings</td><td><code>--nerv-font-mincho</code></td><td>Shippori Mincho B1 800</td><td>Noto Serif JP 900, Hiragino/Yu Mincho</td></tr>
+    <tr><td>Timers, clocks</td><td><code>--nerv-font-segment</code></td><td>DSEG7 Classic</td><td>VT323, monospace</td></tr>
+    <tr><td>Terminal dumps</td><td><code>--nerv-font-terminal</code></td><td>VT323</td><td>monospace</td></tr>
+  </tbody>
+</table>
+
+Use the **Fonts** toolbar button (top of Storybook) to switch between the
+embedded files and the Google Fonts CDN. Each specimen shows a `LOADED` /
+`FALLBACK` badge to check that a face was actually loaded.
+
+## Loading the fonts
+
+The tokens only reference family names. Both font files below register **the
+same family names and weights**, so you load exactly one of them and nothing else
+changes.
+
+### Option A: embedded (default)
+
+Self-hosted woff2 files, bundled with the library: works offline, no third-party
+requests, no GDPR/privacy concern. The Google Fonts files come from the
+[Fontsource](https://fontsource.org) packages, which repackage the exact Google
+Fonts woff2 split by `unicode-range`. The Japanese fonts are therefore cut into
+~120 slices, and a page only downloads the ones it uses. DSEG7 is vendored in
+`src/lib/fonts/dseg7-classic`.
+
+```css
+@import "./src/lib/styles/nerv.css"; /* = fonts.embedded.css + tokens.css */
+```
+
+### Option B: Google Fonts CDN
+
+```css
+@import "./src/lib/styles/fonts.google.css";
+@import "./src/lib/styles/tokens.css";
+```
+
+Or skip the CSS import and put the `<link>` tags in your HTML, which is faster
+because the browser can start fetching before your CSS is parsed:
+
+```html
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link
+  rel="stylesheet"
+  href="https://fonts.googleapis.com/css2?family=Antonio:wght@400;700&family=Archivo+Narrow:wght@400;700&family=Barlow+Condensed:wght@500;700;800;900&family=Noto+Serif+JP:wght@900&family=Oswald:wght@500;700&family=Shippori+Mincho+B1:wght@800&family=VT323&display=swap"
+/>
+```
+
+DSEG7 is not on Google Fonts. `fonts.google.css` loads it from jsDelivr
+(`dseg@0.46.0`). With the `<link>` approach, declare it yourself or import
+`fonts.google.css` anyway.
+
+## Display: Barlow Condensed
+
+<Specimen
+  family="Barlow Condensed"
+  token="--nerv-font-display"
+  weights={[500, 700, 800, 900]}
+  sample="ALERT DANGER EMERGENCY"
+  size="var(--nerv-text-3xl)"
+  color="var(--nerv-red-500)"
+  notes="Full-screen alert words (frames 002, 006, 011, 042). Wider than Antonio, with the flat, slightly rounded terminals of Helvetica Condensed Black."
+/>
+
+<Panel style={{ background: "var(--nerv-red-600)", padding: 0 }}>
+  <div style={{ height: "1.5rem", background: "var(--nerv-pattern-hazard)", "--nerv-hazard-a": "var(--nerv-black)", "--nerv-hazard-b": "var(--nerv-red-600)" }} />
+  <div
+    style={{
+      fontFamily: "var(--nerv-font-display)",
+      fontWeight: 900,
+      fontSize: "var(--nerv-text-display)",
+      lineHeight: "var(--nerv-leading-none)",
+      color: "var(--nerv-black)",
+      textAlign: "center",
+      padding: "1rem 0",
+    }}
+  >
+    ALERT
+  </div>
+  <div style={{ height: "1.5rem", background: "var(--nerv-pattern-hazard)", "--nerv-hazard-a": "var(--nerv-black)", "--nerv-hazard-b": "var(--nerv-red-600)" }} />
+</Panel>
+
+## Compressed: Antonio
+
+<Specimen
+  family="Antonio"
+  token="--nerv-font-compressed"
+  weights={[400, 700]}
+  sample="A.T.FIELD — PILOT VANISHED — MEDICAL RM.303"
+  notes="Tall, very narrow titles and outlined labels (frames 021, 025, 041, 078). This is the most frequent typeface in the reference frames."
+/>
+
+<Panel>
+  <div style={{ transform: "rotate(-12deg) skewX(-6deg)", padding: "3rem 1rem", color: "var(--nerv-amber)" }}>
+    <div style={{ fontFamily: "var(--nerv-font-compressed)", fontWeight: 700, fontSize: "var(--nerv-text-xl)", borderBottom: "3px solid", lineHeight: 1 }}>
+      TERMINAL DOGMA
+    </div>
+    <div style={{ fontFamily: "var(--nerv-font-compressed)", fontWeight: 700, fontSize: "var(--nerv-text-display)", lineHeight: "var(--nerv-leading-none)", letterSpacing: "var(--nerv-tracking-tight)" }}>
+      A.T.FIELD
+    </div>
+    <div style={{ fontFamily: "var(--nerv-font-compressed)", fontWeight: 700, fontSize: "var(--nerv-text-xl)", borderTop: "3px solid", lineHeight: 1.1 }}>
+      GENERATION
+    </div>
+  </div>
+</Panel>
+
+## UI: Archivo Narrow
+
+<Specimen
+  family="Archivo Narrow"
+  token="--nerv-font-ui"
+  weights={[400, 700]}
+  sample="SYNCHRONIZATION TEST NO. 132 · SUBJECT: SHINJI IKARI · L.C.L. PURITY : 99.9999989%"
+  size="var(--nerv-text-lg)"
+  notes="Small data text, lists, axis labels: anything that must stay legible at 10–14px."
+/>
+
+## Mincho: Shippori Mincho B1
+
+<Specimen
+  family="Shippori Mincho B1"
+  token="--nerv-font-mincho"
+  weights={[800]}
+  sample="非常事態 極秘 危険 内部 提訴 決議"
+  size="var(--nerv-text-3xl)"
+  color="var(--nerv-red-500)"
+  letterSpacing="var(--nerv-tracking-mincho)"
+  notes="Stand-in for Matisse EB. 800 is the heaviest weight available. Kanji headings are set with very wide tracking (frames 005, 006, 011, 058)."
+/>
+
+<Specimen
+  family="Noto Serif JP"
+  weights={[900]}
+  sample="非常事態 極秘 危険 内部 提訴 決議"
+  size="var(--nerv-text-3xl)"
+  color="var(--nerv-red-500)"
+  letterSpacing="var(--nerv-tracking-mincho)"
+  notes="Fallback Mincho: heavier (900) with more contrast, but rounder strokes than Matisse."
+/>
+
+<Panel>
+  <div style={{ textAlign: "center", color: "var(--nerv-vermilion)", padding: "1rem 0" }}>
+    <div style={{ fontFamily: "var(--nerv-font-mincho)", fontWeight: 800, fontSize: "var(--nerv-text-2xl)", letterSpacing: "var(--nerv-tracking-mincho)" }}>
+      非常事態
+    </div>
+    <div style={{ fontFamily: "var(--nerv-font-display)", fontWeight: 800, fontSize: "var(--nerv-text-3xl)", lineHeight: 1 }}>
+      EMERGENCY
+    </div>
+    <div style={{ fontFamily: "var(--nerv-font-mincho)", fontWeight: 800, fontSize: "var(--nerv-text-2xl)", letterSpacing: "var(--nerv-tracking-mincho)" }}>
+      非常事態
+    </div>
+  </div>
+</Panel>
+
+## Segment: DSEG7 Classic
+
+<Specimen
+  family="DSEG7 Classic"
+  token="--nerv-font-segment"
+  weights={[400, 700]}
+  sample="4:59:10"
+  size="var(--nerv-text-3xl)"
+  notes="Seven-segment digits for the battery timer and clocks (frames 003, 044, 050). DSEG's glyphs line up with an '8' drawn underneath, which you can use to render the unlit segments."
+/>
+
+<Specimen family="DSEG7 Classic" weights={[700]} italic sample="1:00:87" size="var(--nerv-text-3xl)" notes="The italic matches the slanted internal-battery counter." />
+
+<Panel>
+  <SegmentDemo value="4:59:10" ghost="8:88:88" />
+</Panel>
+
+## Terminal: VT323
+
+<Specimen
+  family="VT323"
+  token="--nerv-font-terminal"
+  weights={[400]}
+  sample="CO-CPU  Check  256seg  OK"
+  size="var(--nerv-text-xl)"
+  color="var(--nerv-phosphor)"
+  notes="Boot logs and MAGI system dumps (frames 012, 032, 077)."
+/>
+
+<Panel>
+  <pre
+    style={{
+      margin: 0,
+      fontFamily: "var(--nerv-font-terminal)",
+      fontSize: "var(--nerv-text-lg)",
+      lineHeight: 1,
+      color: "var(--nerv-phosphor)",
+      textShadow: "var(--nerv-glow-sm)",
+      background: "var(--nerv-pattern-scanlines)",
+    }}
+  >
+{`CO-CPU              Check        256seg     OK
+I/O VECTORS         Check                   OK
+CONSOLE DRIVERS     Check                   OK
+STATUS ANALYZER     Check        SLAVE      OK
+VIRUS PROTECTION    Chech        GREEN      OK
+
+addr PSP  blks    size  owner/parameters
+D0E0 sys     1    5296  kozaic
+D22C sys     1    2416  ersdry
+---- UMB total:  53 TB ----`}
+  </pre>
+</Panel>
+
+## Candidate comparison
+
+The four condensed candidates from the first analysis, side by side. Change
+the tokens in `tokens.css` to swap them.
+
+<Compare families={["Antonio", "Barlow Condensed", "Oswald", "Archivo Narrow"]} sample="A.T.FIELD DETECTED" />
+
+<Compare families={["Antonio", "Barlow Condensed", "Oswald", "Archivo Narrow"]} sample="EMERGENCY" weight={700} size="var(--nerv-text-3xl)" />
+
+## Font tokens
+
+<TokenTable
+  tokens={[
+    "--nerv-font-display",
+    "--nerv-font-compressed",
+    "--nerv-font-ui",
+    "--nerv-font-mincho",
+    "--nerv-font-segment",
+    "--nerv-font-terminal",
+  ]}
+  preview={(t) => <span style={{ fontFamily: `var(${t})`, fontWeight: 700, fontSize: "var(--nerv-text-lg)" }}>NERV 非常 4:59</span>}
+/>
+
+<TokenTable
+  tokens={["--nerv-weight-regular", "--nerv-weight-medium", "--nerv-weight-bold", "--nerv-weight-heavy", "--nerv-weight-black"]}
+  preview={(t) => <span style={{ fontFamily: "var(--nerv-font-display)", fontWeight: `var(${t})`, fontSize: "var(--nerv-text-lg)" }}>EMERGENCY</span>}
+/>
+
+## Licenses
+
+All fonts are under the [SIL Open Font License 1.1](https://openfontlicense.org):
+Antonio, Barlow Condensed, Oswald, Archivo Narrow, Shippori Mincho B1, Noto
+Serif JP, VT323 (via Google Fonts / Fontsource) and DSEG (© keshikan, license
+file in `src/lib/fonts/dseg7-classic`).

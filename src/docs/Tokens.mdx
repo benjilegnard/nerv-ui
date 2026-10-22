@@ -1,0 +1,277 @@
+import { Meta } from "@storybook/addon-docs/blocks";
+import { Swatches, TokenTable, Panel } from "./blocks";
+
+<Meta title="Foundations/Tokens" />
+
+# Tokens
+
+All tokens are CSS custom properties prefixed with `--nerv-`, defined in
+`src/lib/styles/tokens.css`. They are plain CSS, so they work the same in React,
+in web components (custom properties go through shadow DOM boundaries) and in
+plain HTML.
+
+```css
+@import "./src/lib/styles/nerv.css"; /* tokens + self-hosted fonts */
+```
+
+(Repository paths. Package entry points will be added with the library build.)
+
+The primitive colours were **sampled from the reference frames** (see
+`docs/REFERENCE.md`). The frame numbers are in the notes below each swatch. The
+frames come from compressed video, so the values were picked from the brightest
+part of each colour rather than averaged, which would give muddy results.
+
+## Colour: primitives
+
+### Blacks
+
+<Swatches
+  tokens={[
+    { token: "--nerv-black", note: "Base background" },
+    { token: "--nerv-black-warm", note: "CRT black with red bleed · 001, 021" },
+    { token: "--nerv-navy", note: "Hex mesh backgrounds · 072" },
+  ]}
+/>
+
+### Reds
+
+<Swatches
+  tokens={[
+    { token: "--nerv-red-900", note: "Darkest fills · 062" },
+    { token: "--nerv-red-700", note: "Most frequent red hue" },
+    { token: "--nerv-red-600", note: "ALERT background · 002" },
+    { token: "--nerv-red-500", note: "Glowing red text, lamps · 052" },
+    { token: "--nerv-crimson", note: "DETECTED, toxicity bars · 022, 080" },
+  ]}
+/>
+
+### Oranges
+
+<Swatches
+  tokens={[
+    { token: "--nerv-rust", note: "Flat orange backgrounds · 007" },
+    { token: "--nerv-vermilion", note: "EMERGENCY title · 006" },
+    { token: "--nerv-orange", note: "Outlined label boxes" },
+    { token: "--nerv-amber", note: "A.T.FIELD, timers, most text · 003, 021" },
+    { token: "--nerv-yellow", note: "Highlights, ANALYZING · 023" },
+  ]}
+/>
+
+### Greens
+
+<Swatches
+  tokens={[
+    { token: "--nerv-green-700", note: "Dim grid, contour lines" },
+    { token: "--nerv-green", note: "Bright vector green · 063" },
+    { token: "--nerv-phosphor", note: "Terminal text · 012" },
+    { token: "--nerv-mint", note: "MAGI cards, phase bars · 058, 061" },
+    { token: "--nerv-aqua", note: "Toxicity bars · 080" },
+    { token: "--nerv-teal", note: "Line-art maps · 070" },
+    { token: "--nerv-lime", note: "Bezel gradient end · 003" },
+  ]}
+/>
+
+### Blues & violets
+
+<Swatches
+  tokens={[
+    { token: "--nerv-blue-700", note: "Gradient fills · 069, 083" },
+    { token: "--nerv-blue", note: "Medical monitor · 092" },
+    { token: "--nerv-steel", note: "Hex mesh strokes · 072" },
+    { token: "--nerv-violet", note: "Contour waveforms · 008" },
+    { token: "--nerv-magenta", note: "Sine bundles · 030" },
+  ]}
+/>
+
+### Neutrals
+
+<Swatches
+  tokens={[
+    { token: "--nerv-grey-light", note: "Light clock panel · 050" },
+    { token: "--nerv-white", note: "White HUD labels · 043, 086" },
+  ]}
+/>
+
+## Colour: semantic
+
+Components should use these rather than primitives, so a screen can be re-themed
+(e.g. the all-red alert state vs. the green MAGI state) by overriding a few
+variables on a container.
+
+<Swatches
+  tokens={[
+    { token: "--nerv-color-bg" },
+    { token: "--nerv-color-surface" },
+    { token: "--nerv-color-text" },
+    { token: "--nerv-color-text-muted" },
+    { token: "--nerv-color-frame" },
+    { token: "--nerv-color-grid" },
+    { token: "--nerv-color-alert" },
+    { token: "--nerv-color-alert-text" },
+    { token: "--nerv-color-warning" },
+    { token: "--nerv-color-ok" },
+    { token: "--nerv-color-info" },
+    { token: "--nerv-color-data" },
+    { token: "--nerv-color-terminal" },
+  ]}
+/>
+
+## Typography
+
+Font families, weights and the type scale are documented with specimens on the
+[Typography](?path=/docs/foundations-typography--docs) page.
+
+<TokenTable
+  tokens={[
+    "--nerv-text-2xs",
+    "--nerv-text-xs",
+    "--nerv-text-sm",
+    "--nerv-text-md",
+    "--nerv-text-lg",
+    "--nerv-text-xl",
+    "--nerv-text-2xl",
+    "--nerv-text-3xl",
+  ]}
+  preview={(t) => (
+    <span style={{ fontFamily: "var(--nerv-font-compressed)", fontWeight: 700, fontSize: `var(${t})`, lineHeight: 1 }}>
+      PILOT VANISHED
+    </span>
+  )}
+/>
+
+<TokenTable
+  tokens={[
+    "--nerv-leading-none",
+    "--nerv-leading-tight",
+    "--nerv-leading-normal",
+    "--nerv-tracking-tight",
+    "--nerv-tracking-normal",
+    "--nerv-tracking-wide",
+    "--nerv-tracking-mincho",
+  ]}
+/>
+
+## Spacing
+
+<TokenTable
+  tokens={[
+    "--nerv-space-1",
+    "--nerv-space-2",
+    "--nerv-space-3",
+    "--nerv-space-4",
+    "--nerv-space-5",
+    "--nerv-space-6",
+    "--nerv-space-7",
+    "--nerv-space-8",
+  ]}
+  preview={(t) => <div style={{ width: `var(${t})`, height: "0.75rem", background: "var(--nerv-mint)" }} />}
+/>
+
+## Strokes & radii
+
+Frames, label boxes and rules are thin and crisp. The double stroke reproduces
+stamped labels like `極秘 TOP SECRET` (frame 005).
+
+<TokenTable
+  tokens={["--nerv-stroke-hairline", "--nerv-stroke-thin", "--nerv-stroke-thick"]}
+  preview={(t) => <div style={{ width: "8rem", borderTop: `var(${t}) solid var(--nerv-orange)` }} />}
+/>
+
+<TokenTable
+  tokens={["--nerv-radius-none", "--nerv-radius-label", "--nerv-radius-pill"]}
+  preview={(t) => (
+    <div
+      style={{
+        padding: "0.25rem 0.75rem",
+        display: "inline-block",
+        border: "2px solid var(--nerv-orange)",
+        borderRadius: `var(${t})`,
+        fontFamily: "var(--nerv-font-compressed)",
+        fontWeight: 700,
+        fontSize: "var(--nerv-text-lg)",
+      }}
+    >
+      PILOT VANISHED
+    </div>
+  )}
+/>
+
+<Panel>
+  <div
+    style={{
+      display: "inline-block",
+      padding: "0.25rem 1rem",
+      border: "var(--nerv-stroke-double) var(--nerv-red-500)",
+      color: "var(--nerv-red-500)",
+      textAlign: "center",
+      lineHeight: 1.2,
+    }}
+  >
+    <div style={{ fontFamily: "var(--nerv-font-mincho)", fontWeight: 800, fontSize: "var(--nerv-text-2xl)", lineHeight: 1.2, letterSpacing: "var(--nerv-tracking-mincho)" }}>
+      極秘
+    </div>
+    <div style={{ fontFamily: "var(--nerv-font-mincho)", fontWeight: 800, fontSize: "var(--nerv-text-lg)", lineHeight: 1.2, letterSpacing: "var(--nerv-tracking-wide)" }}>
+      TOP SECRET
+    </div>
+  </div>
+  <code style={{ marginLeft: "1rem" }}>border: var(--nerv-stroke-double) var(--nerv-red-500)</code>
+</Panel>
+
+## Glow
+
+Screens in the show glow like CRT phosphor. Glow tokens are lists of shadows
+that use `--nerv-glow-color`, which defaults to `currentColor`, so they work with
+both `text-shadow` and `box-shadow`.
+
+<TokenTable
+  tokens={["--nerv-glow-sm", "--nerv-glow-md", "--nerv-glow-lg"]}
+  preview={(t) => (
+    <span
+      style={{
+        fontFamily: "var(--nerv-font-compressed)",
+        fontWeight: 700,
+        fontSize: "var(--nerv-text-xl)",
+        color: "var(--nerv-red-500)",
+        textShadow: `var(${t})`,
+      }}
+    >
+      LIFE
+    </span>
+  )}
+/>
+
+## Patterns
+
+<TokenTable
+  tokens={["--nerv-pattern-hazard", "--nerv-pattern-scanlines"]}
+  preview={(t) => (
+    <div
+      style={{
+        width: "12rem",
+        height: "3rem",
+        background: `var(${t}), var(--nerv-rust)`,
+      }}
+    />
+  )}
+/>
+
+Hazard stripe colours and size can be overridden locally:
+
+```css
+.caution {
+  --nerv-hazard-a: var(--nerv-yellow);
+  --nerv-hazard-size: 0.75rem;
+  background: var(--nerv-pattern-hazard);
+}
+```
+
+<Panel>
+  <div
+    style={{
+      "--nerv-hazard-a": "var(--nerv-yellow)",
+      "--nerv-hazard-size": "0.75rem",
+      height: "2.5rem",
+      background: "var(--nerv-pattern-hazard)",
+    }}
+  />
+</Panel>

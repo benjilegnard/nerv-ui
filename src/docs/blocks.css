@@ -1,0 +1,165 @@
+.nerv-doc-panel {
+  margin: 1rem 0 2rem;
+  padding: 1.25rem;
+  background: var(--nerv-black);
+  color: var(--nerv-amber);
+  font-family: var(--nerv-font-ui);
+  border: 1px solid color-mix(in oklab, var(--nerv-orange) 40%, transparent);
+  overflow-x: auto;
+
+  code {
+    font-family: ui-monospace, monospace;
+    font-size: 0.8125rem;
+    color: var(--nerv-white);
+    background: none;
+    border: 0;
+    padding: 0;
+  }
+}
+
+/* Swatches */
+
+.nerv-doc-swatches {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(10rem, 1fr));
+  gap: 1rem;
+}
+
+.nerv-doc-swatch {
+  margin: 0;
+
+  figcaption {
+    display: flex;
+    flex-direction: column;
+    gap: 0.125rem;
+    margin-top: 0.5rem;
+  }
+}
+
+.nerv-doc-swatch__chip {
+  height: 4rem;
+  border: 1px solid color-mix(in oklab, var(--nerv-white) 20%, transparent);
+}
+
+.nerv-doc-swatch__value {
+  font-family: ui-monospace, monospace;
+  font-size: 0.75rem;
+  color: var(--nerv-amber);
+}
+
+.nerv-doc-swatch__note {
+  font-size: 0.75rem;
+  color: color-mix(in oklab, var(--nerv-white) 60%, transparent);
+}
+
+/* Token tables */
+
+.nerv-doc-table {
+  width: 100%;
+  border-collapse: collapse;
+
+  td {
+    padding: 0.5rem 0.75rem;
+    border: 0;
+    border-bottom: 1px solid color-mix(in oklab, var(--nerv-orange) 25%, transparent);
+    background: none;
+    vertical-align: middle;
+  }
+
+  tr {
+    background: none !important;
+    border: 0;
+  }
+}
+
+.nerv-doc-table__value {
+  font-family: ui-monospace, monospace;
+  font-size: 0.75rem;
+  color: color-mix(in oklab, var(--nerv-white) 70%, transparent);
+  max-width: 22rem;
+}
+
+/* Specimens */
+
+.nerv-doc-specimen__header {
+  display: flex;
+  align-items: baseline;
+  gap: 1rem;
+  padding-bottom: 0.75rem;
+  margin-bottom: 0.5rem;
+  border-bottom: 1px solid var(--nerv-orange);
+  font-size: 1rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.nerv-doc-specimen__notes {
+  margin: 0 0 0.75rem;
+  font-size: 0.875rem;
+  color: color-mix(in oklab, var(--nerv-white) 70%, transparent);
+}
+
+.nerv-doc-specimen__row {
+  display: grid;
+  grid-template-columns: 9rem 1fr;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.5rem 0;
+}
+
+.nerv-doc-specimen__meta {
+  font-size: 0.75rem;
+  color: color-mix(in oklab, var(--nerv-white) 60%, transparent);
+}
+
+.nerv-doc-specimen__sample {
+  line-height: 1.1;
+  overflow-wrap: anywhere;
+}
+
+.nerv-doc-status {
+  display: inline-block;
+  margin-left: 0.25rem;
+  padding: 0 0.3em;
+  font-size: 0.625rem;
+  letter-spacing: 0.08em;
+  border: 1px solid currentColor;
+
+  &.is-ok {
+    color: var(--nerv-mint);
+  }
+  &.is-missing {
+    color: var(--nerv-red-500);
+  }
+}
+
+@media (max-width: 40rem) {
+  .nerv-doc-specimen__row {
+    grid-template-columns: 1fr;
+    gap: 0.25rem;
+  }
+}
+
+/* Seven-segment demo */
+
+.nerv-doc-segment {
+  display: inline-grid;
+  font-family: var(--nerv-font-segment);
+  font-weight: 700;
+  font-style: italic;
+  font-size: var(--nerv-text-3xl);
+  line-height: 1;
+  color: var(--nerv-amber);
+
+  > span {
+    grid-area: 1 / 1;
+  }
+
+  > [aria-hidden] {
+    color: color-mix(in oklab, var(--nerv-amber) 12%, transparent);
+  }
+
+  > :not([aria-hidden]) {
+    text-shadow: var(--nerv-glow-sm);
+  }
+}
