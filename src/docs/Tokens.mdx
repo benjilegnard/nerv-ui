@@ -133,7 +133,14 @@ Font families, weights and the type scale are documented with specimens on the
     "--nerv-text-3xl",
   ]}
   preview={(t) => (
-    <span style={{ fontFamily: "var(--nerv-font-compressed)", fontWeight: 700, fontSize: `var(${t})`, lineHeight: 1 }}>
+    <span
+      style={{
+        fontFamily: "var(--nerv-font-compressed)",
+        fontWeight: 700,
+        fontSize: `var(${t})`,
+        lineHeight: 1,
+      }}
+    >
       PILOT VANISHED
     </span>
   )}
@@ -164,7 +171,9 @@ Font families, weights and the type scale are documented with specimens on the
     "--nerv-space-7",
     "--nerv-space-8",
   ]}
-  preview={(t) => <div style={{ width: `var(${t})`, height: "0.75rem", background: "var(--nerv-mint)" }} />}
+  preview={(t) => (
+    <div style={{ width: `var(${t})`, height: "0.75rem", background: "var(--nerv-mint)" }} />
+  )}
 />
 
 ## Strokes & radii
@@ -174,7 +183,9 @@ stamped labels like `極秘 TOP SECRET` (frame 005).
 
 <TokenTable
   tokens={["--nerv-stroke-hairline", "--nerv-stroke-thin", "--nerv-stroke-thick"]}
-  preview={(t) => <div style={{ width: "8rem", borderTop: `var(${t}) solid var(--nerv-orange)` }} />}
+  preview={(t) => (
+    <div style={{ width: "8rem", borderTop: `var(${t}) solid var(--nerv-orange)` }} />
+  )}
 />
 
 <TokenTable
@@ -207,10 +218,26 @@ stamped labels like `極秘 TOP SECRET` (frame 005).
       lineHeight: 1.2,
     }}
   >
-    <div style={{ fontFamily: "var(--nerv-font-mincho)", fontWeight: 800, fontSize: "var(--nerv-text-2xl)", lineHeight: 1.2, letterSpacing: "var(--nerv-tracking-mincho)" }}>
+    <div
+      style={{
+        fontFamily: "var(--nerv-font-mincho)",
+        fontWeight: 800,
+        fontSize: "var(--nerv-text-2xl)",
+        lineHeight: 1.2,
+        letterSpacing: "var(--nerv-tracking-mincho)",
+      }}
+    >
       極秘
     </div>
-    <div style={{ fontFamily: "var(--nerv-font-mincho)", fontWeight: 800, fontSize: "var(--nerv-text-lg)", lineHeight: 1.2, letterSpacing: "var(--nerv-tracking-wide)" }}>
+    <div
+      style={{
+        fontFamily: "var(--nerv-font-mincho)",
+        fontWeight: 800,
+        fontSize: "var(--nerv-text-lg)",
+        lineHeight: 1.2,
+        letterSpacing: "var(--nerv-tracking-wide)",
+      }}
+    >
       TOP SECRET
     </div>
   </div>
