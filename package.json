@@ -10,13 +10,14 @@
     "react",
     "ui"
   ],
-  "homepage": "https://benjilegnard.github.io/nerv-ui/",
+  "homepage": "https://benjilegnard.github.io/nervui/",
   "bugs": {
-    "url": "https://github.com/benjilegnard/nerv-ui/issues"
+    "url": "https://github.com/benjilegnard/nervui/issues"
   },
+  "license": "WTFPL",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/benjilegnard/nerv-ui.git"
+    "url": "git+https://github.com/benjilegnard/nervui.git"
   },
   "files": [
     "dist"
