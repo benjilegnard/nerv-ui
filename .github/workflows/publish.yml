@@ -34,6 +34,7 @@ jobs:
           fi
       - name: Build library
         run: pnpm run build-lib
-      # npm CLI (bundled with Node 26) handles the OIDC token exchange.
+      # The pnpm Node runtime ships without npm, and the runner's preinstalled npm
+      # is too old for trusted publishing (OIDC needs npm >= 11.5.1).
       - name: Publish
-        run: npm publish --tag "${{ steps.version.outputs.dist-tag }}"
+        run: pnpm dlx npm@^11.5.1 publish --tag "${{ steps.version.outputs.dist-tag }}"
