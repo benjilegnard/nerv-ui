@@ -1,5 +1,5 @@
 {
-  "name": "nervui",
+  "name": "@benjilegnard/nerv-ui",
   "version": "0.0.0",
   "description": "React UI kit inspired by the NERV interfaces of Neon Genesis Evangelion",
   "keywords": [
@@ -10,14 +10,14 @@
     "react",
     "ui"
   ],
-  "homepage": "https://benjilegnard.github.io/nervui/",
+  "homepage": "https://benjilegnard.github.io/nerv-ui/",
   "bugs": {
-    "url": "https://github.com/benjilegnard/nervui/issues"
+    "url": "https://github.com/benjilegnard/nerv-ui/issues"
   },
   "license": "WTFPL",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/benjilegnard/nervui.git"
+    "url": "git+https://github.com/benjilegnard/nerv-ui.git"
   },
   "files": [
     "dist"
